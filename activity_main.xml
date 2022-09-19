@@ -40,9 +40,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:importantForAutofill="no"
+            android:hint="カタカナで入力してください"
             android:inputType="textPersonName"
-            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck"
+            android:importantForAutofill="no" />
 
         <TextView
             android:id="@+id/textView4"
@@ -79,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="選択"
+                android:text="登録"
                 tools:visibility="visible" />
 
             <Button
