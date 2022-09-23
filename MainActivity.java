@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // メンバー変数
     private String m_strInitialDir = Environment.getExternalStorageDirectory().getPath();    // 初期フォルダ
-
+    private final String dataDir = "/storage/emulated/0/Pictures/";             //特徴点の書き出しフォルダ
     private final String YNFilename = "yunet.onnx";                             // YuNetの学習済みのモデル
     private final String SFFilename = "face_recognizer_fast.onnx";              // SFaceの学習済みのモデル
     private final String DFilename  = "Detect_";                                // 検出対象の顔画像（切り抜き後）
@@ -191,14 +191,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 顔を切り抜く
             face_recognizer.alignCrop(img, dtfaces, aligned_face);
 
-            Context context = getApplicationContext();
-            String dataDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() + File.separator;
+            //Context context = getApplicationContext();
+            //String dataDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() + File.separator;
 
             // 顔画像を保存
             EditText et_employeeNumber = (EditText)findViewById(R.id.employeeNumber);
             String DfileName = dataDir + DFilename + et_employeeNumber.getText() + ".jpg";
 
             retb = Imgcodecs.imwrite(DfileName, aligned_face );
+
             if( retb == false )
             {
                 Log.d("debug", "Error 顔画像保存失敗");
@@ -222,9 +223,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             EditText et_name = (EditText)findViewById(R.id.name);
 
             featureExport(face_feature.getNativeObjAddr(),
-                        et_employeeNumber.getText().toString(),
-                        et_name.getText().toString(),
-                        dataDir);
+                    et_employeeNumber.getText().toString(),
+                    et_name.getText().toString(),
+                    dataDir);
 
             Toast.makeText( this, "登録完了しました", Toast.LENGTH_SHORT ).show();
 
@@ -298,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void requestReadWriteExternalStoragePermission()
     {
         if(PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission( this, Manifest.permission.READ_EXTERNAL_STORAGE ) &&
-        PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission( this, Manifest.permission.WRITE_EXTERNAL_STORAGE ))
+                PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission( this, Manifest.permission.WRITE_EXTERNAL_STORAGE ))
         {    // パーミッションは付与されている
             return;
         }
@@ -329,4 +330,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
 }
