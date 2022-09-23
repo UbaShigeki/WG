@@ -44,12 +44,11 @@ Java_com_example_faceentry_MainActivity_featureExport(
     //----------------------------------------------
     //fstream fs;
 
-    __android_log_write(ANDROID_LOG_DEBUG, "debug", "CCCCCC");
-    ofstream ofs;
+     ofstream ofs;
     //ofs.open(FFolder+FFilename_Name, ios::binary|ios::app);
     ofs.open(dataDirPath + FFilename_Name, ios::binary|ios::app);
     ofs<< ft <<endl;
-    ofs<< name <<endl;
+    ofs<< name_str <<endl;
     ofs.close();
 
     env->ReleaseStringUTFChars(name, name_str);
